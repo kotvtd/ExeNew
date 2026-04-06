@@ -1,0 +1,52 @@
+{
+  "book": [
+    {
+      "id": "B1",
+      "name": "Doraemon",
+      "total": "16",
+      "count": "16",
+      "hBorrow": []
+    },
+    {
+      "id": "B2",
+      "name": "Thám Tử Lừng Danh Conan",
+      "total": "5",
+      "count": "3",
+      "hBorrow": []
+    },
+    {
+      "id": "B4",
+      "name": "7 Viên Ngọc zồng",
+      "total": "5",
+      "count": "3",
+      "hBorrow": []
+    },
+    {
+      "id": "4",
+      "name": "Nếu một mai tôi bay lên trờis",
+      "total": "3",
+      "count": "3",
+      "hBorrow": []
+    }
+  ],
+  "hBorrow": [
+    {
+      "id": "H1",
+      "name": "Võ Tắc Thiên",
+      "total": "0",
+      "bBorrow": []
+    },
+    {
+      "id": "H2",
+      "name": "Trần Tử Địa",
+      "total": "0",
+      "bBorrow": []
+    },
+    {
+      "id": "H3",
+      "name": "dat maniac",
+      "total": 0,
+      "bBorrow": []
+    }
+  ]
+}
