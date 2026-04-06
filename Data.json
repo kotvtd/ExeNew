@@ -1,0 +1,64 @@
+{
+  "book": [
+    {
+      "id": "B1",
+      "name": "Doraemon",
+      "audor": "Fujiko F. Fujo",
+      "total": "16",
+      "count": "16",
+      "hBorrow": []
+    },
+    {
+      "id": "B2",
+      "name": "Thám Tử Lừng Danh Conan",
+      "audor": "Aoyama Gosho",
+      "total": "5",
+      "count": "5",
+      "hBorrow": []
+    },
+    {
+      "id": "B4",
+      "name": "Đảo Hải Tặc",
+      "audor": "Oda",
+      "total": "5",
+      "count": "5",
+      "hBorrow": []
+    },
+    {
+      "id": "4",
+      "name": "Nếu một mai tôi bay lên trờis",
+      "audor": "Trúc Nhân",
+      "total": "3",
+      "count": "3",
+      "hBorrow": []
+    },
+    {
+      "id": "B6",
+      "name": "Inuyasha",
+      "audor": "Amikawa Hidetoshi",
+      "total": "2",
+      "count": "2",
+      "hBorrow": []
+    }
+  ],
+  "hBorrow": [
+    {
+      "id": "H1",
+      "name": "Võ Tắc Thiên",
+      "total": "0",
+      "bBorrow": []
+    },
+    {
+      "id": "H2",
+      "name": "Trần Tử Địa",
+      "total": "0",
+      "bBorrow": []
+    },
+    {
+      "id": "H3",
+      "name": "dat maniac",
+      "total": 0,
+      "bBorrow": []
+    }
+  ]
+}
