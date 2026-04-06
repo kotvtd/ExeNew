@@ -1,0 +1,4 @@
+# Ignore folder abc
+node_modules/
+
+package-lock.json.js
