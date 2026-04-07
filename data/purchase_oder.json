@@ -1,0 +1,16 @@
+{
+    "purchase_order":[
+        {
+            "id": 1,
+            "purchase_items":[
+                {
+                    "var_itemid": 101,
+                    "quantity": 50,
+                    "cost_price": 100000                    
+                }
+            ],
+            "status": "complete",
+            "create_at": "2026-04-06"
+        }
+    ]
+}

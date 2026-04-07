@@ -1,0 +1,10 @@
+{
+    "transaction": [
+        {
+            "id": 1,
+            "amount": 100000,
+            "des": "Pick-up",
+            "create_at": "2026-06-04"
+        }
+    ]
+}

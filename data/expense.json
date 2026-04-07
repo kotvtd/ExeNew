@@ -1,0 +1,10 @@
+{
+    "expense": [
+        {
+            "id": 1,
+            "amount": 5000000,
+            "des": "Purchase Shirt",
+            "create_at": "2026-06-04"
+        }
+    ]
+}

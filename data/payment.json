@@ -1,0 +1,11 @@
+{
+    "payment":[
+        {
+            "id": 1,
+            "order_id": 1,
+            "amount": 500000,
+            "method": "cash",
+            "status": "paid"
+        }
+    ]
+}

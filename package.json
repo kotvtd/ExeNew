@@ -1,0 +1,25 @@
+{
+  "name": "exenew",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "ts-node src/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kotvtd/ExeNew.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/kotvtd/ExeNew/issues"
+  },
+  "homepage": "https://github.com/kotvtd/ExeNew#readme",
+  "devDependencies": {
+    "typescript": "^6.0.2"
+  }
+}

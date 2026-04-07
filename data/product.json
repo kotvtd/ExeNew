@@ -1,0 +1,17 @@
+{
+    "product": [
+        {
+            "id": 1,
+            "name": "T-Shirt",
+            "category": "Shirt",
+            "variant":[{
+                "id": 101,
+                "size": "M",
+                "color": "Black",
+                "price": 250000,
+                "cost_price": 100000,
+                "stock": 49
+            }]
+        }
+    ]
+}
