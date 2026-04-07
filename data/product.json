@@ -5,7 +5,7 @@
             "name": "T-Shirt",
             "category": "Shirt",
             "variant":[{
-                "id": 101,
+                "id": 10001,
                 "size": "M",
                 "color": "Black",
                 "price": 250000,

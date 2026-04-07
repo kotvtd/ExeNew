@@ -4,7 +4,7 @@
             "id": 1,
             "purchase_items":[
                 {
-                    "var_itemid": 101,
+                    "var_itemid": 10001,
                     "quantity": 50,
                     "cost_price": 100000                    
                 }
