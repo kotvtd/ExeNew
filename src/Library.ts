@@ -12,10 +12,10 @@ const rl = readline.createInterface({
     output: process.stdout,
 });
 
-function SaveJson(){
+function SaveJson():void{
     fs.writeFileSync('src/Data.json',JSON.stringify(dataLbr, null, 2),'utf-8');
 }
-function EndLine(){
+function EndLine():void{
     console.log("==============================");
     console.log("Bạn hãy nhập lựa chọn phù hợp:");
 }
@@ -26,7 +26,7 @@ function NotTrue(fnc: () => void): void{
     });
 }
 Menu();
-function Menu(){
+function Menu():void{
     let a: number;
     // for(let i: number = 0; i> dataLbr.book.length; i++){
     //                 console.log(dataLbr.book[i].name);
@@ -492,7 +492,6 @@ function AddOld(): void{
         }
     });
 }
-
 function HSHandle(): void{
 let a: number;
     console.log("=== Bạn Muốn Thao Tác Gì ? ====");
@@ -523,9 +522,6 @@ let a: number;
         }
     })
 }
-
-
-
 function AddHS(): void{
     let nameHs: string;
     rl.question("Nhập tên học sinh: ", function(inputName){
@@ -562,7 +558,6 @@ function AddHS(): void{
         });
     })
 }
-
 function ReturnBook(){
     let idTv: string, idB: string;
     let nameTv: string, nameBook: string;
