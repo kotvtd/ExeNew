@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "name": "hehe",
+    "category": "hehehheh",
+    "variant": [
+      {
+        "id": 10001,
+        "size": "L",
+        "color": "blue",
+        "price": 25,
+        "cost_price": 15,
+        "stock": 130
+      }
+    ]
+  }
+]
