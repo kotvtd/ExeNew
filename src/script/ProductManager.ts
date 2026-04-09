@@ -1,7 +1,29 @@
 import { loadJSON, saveJSON } from "./JsonManager";
+import { askQuestion, menuProductManager } from "./AppManager";
 
 const productFile = "product.json";
 const product = loadJSON(productFile);
+
+export async function addVariantFlow(productID: number): Promise<void>{
+    const size:string = await askQuestion("Enter variant size: ");
+    const color: string = await askQuestion("Enter variant color: ");
+    const price: string = await askQuestion("Enter variant price: ");
+    const cost_price: string = await askQuestion("Enter variant cost price: ");
+    const stock: string = await askQuestion("Enter variant stock: ");
+    AddVarProduct(productID, size, color, Number(price), Number(cost_price), Number(stock));
+    console.log("Variant added.");
+    askQuestion("Press Enter to return...").then(() => {
+        menuProductManager();
+    });
+}
+
+export async function addProductFlow(): Promise<void>{
+    const name: string = await askQuestion("Enter product name: ");
+    const category: string = await askQuestion("Enter product category: ");
+    let productNew = AddProduct(name, category);
+    console.log(`Product added: ${productNew.id}`);
+    await addVariantFlow(productNew.id);
+}
 
 
 
@@ -20,15 +42,19 @@ interface Product {
     variant: Variant[];
 }
 export function BrowseProduct(): void{
-    for(let i: number = 0; i < product.length; i++){
-        console.log(product[i].name);
-        console.log(product[i].category);
-            for(let j: number = 0; j < product[i].variant.length; j++){
-                console.log(product[i].variant[j].size);
-                console.log(product[i].variant[j].color);
-                console.log(product[i].variant[j].price);
-                console.log(product[i].variant[j].stock);
-            }
+    console.log("\n\n====== Product List ======");
+    for (let i = 0; i < product.length; i++) {
+        console.log(`\n\n📦 Product ${i + 1}: `);
+        console.log(` - Name     : ${product[i].name}`);
+        console.log(` - Category : ${product[i].category}`);
+        for (let j = 0; j < product[i].variant.length; j++) {
+            console.log("------------------------------------");
+            console.log(`     Size  : ${product[i].variant[j].size}`);
+            console.log(`     Color : ${product[i].variant[j].color}`);
+            console.log(`     Price : ${product[i].variant[j].price}`);
+            console.log(`     Stock : ${product[i].variant[j].stock}`);
+        }
+            console.log("------------------------------------");
     }
 }
 export function AddProduct(name: string, category: string): Product{
@@ -124,13 +150,11 @@ export function SubQuantity(productId: number, variantId: number, quantity: numb
         saveJSON(productFile, product);
     }
 }
-
 export async function LoadProduct(): Promise<Product[]>{
     const response = await fetch(productFile);
     const data = await response.json();
     return data ;
 }
-
 export async function renderProducts() {
     const products = await LoadProduct();
 
