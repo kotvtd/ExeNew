@@ -1,5 +1,5 @@
 import { loadJSON, saveJSON } from "./JsonManager";
-import { askQuestion, menuProductManager } from "./AppManager";
+import { askQuestion, PressEnterToContinue, closeReadline } from "./AppManager";
 
 const productFile = "product.json";
 const product = loadJSON(productFile);
@@ -27,7 +27,7 @@ export async function addProductFlow(): Promise<void>{
 
 
 
-interface Variant {
+export interface Variant {
     id: number;
     size: string;
     color: string;
@@ -35,7 +35,7 @@ interface Variant {
     cost_price: number;
     stock: number;
 }
-interface Product {
+export interface Product {
     id: number;
     name: string;
     category: string;
@@ -43,16 +43,16 @@ interface Product {
 }
 export function BrowseProduct(): void{
     console.log("\n\n====== Product List ======");
-    for (let i = 0; i < product.length; i++) {
-        console.log(`\n\n📦 Product ${i + 1}: `);
-        console.log(` - Name     : ${product[i].name}`);
-        console.log(` - Category : ${product[i].category}`);
-        for (let j = 0; j < product[i].variant.length; j++) {
+    for (let indexProduct = 0; indexProduct < product.length; indexProduct++) {
+        console.log(`\n\n📦 Product ${indexProduct + 1}: `);
+        console.log(` - Name     : ${product[indexProduct].name}`);
+        console.log(` - Category : ${product[indexProduct].category}`);
+        for (let indexVariant = 0; indexVariant < product[indexProduct].variant.length; indexVariant++) {
             console.log("------------------------------------");
-            console.log(`     Size  : ${product[i].variant[j].size}`);
-            console.log(`     Color : ${product[i].variant[j].color}`);
-            console.log(`     Price : ${product[i].variant[j].price}`);
-            console.log(`     Stock : ${product[i].variant[j].stock}`);
+            console.log(`     Size  : ${product[indexProduct].variant[indexVariant].size}`);
+            console.log(`     Color : ${product[indexProduct].variant[indexVariant].color}`);
+            console.log(`     Price : ${product[indexProduct].variant[indexVariant].price}`);
+            console.log(`     Stock : ${product[indexProduct].variant[indexVariant].stock}`);
         }
             console.log("------------------------------------");
     }
@@ -88,28 +88,43 @@ export function AddVarProduct(productId: number, size: string, color: string,
     product_temp.variant.push(variantNew);
     saveJSON(productFile, product);
 }
-export function EditProduct(productId: number, name: string, category: string): void{
+
+
+export async function EditProduct(productId: number): Promise<void>{
     const product_temp = product.find((p: Product) => p.id === productId);
     if(!product_temp){
         console.log("Product not found");
+        askQuestion("Press Enter to return...").then(() => {
+            handleProductManager("4");
+        });
         return;
     }
-    product_temp.name = name;
-    product_temp.category = category;
+    const productNameEdit: string = await askQuestion("Enter new product name : ");
+    const productCategoryEdit: string = await askQuestion("Enter new product category : ");
+    product_temp.name = productNameEdit;
+    product_temp.category = productCategoryEdit;
     saveJSON(productFile, product);
 }
-export function EditVarProduct(productId: number, variantId: number, size: string,
-    color: string, price: number, cost_price: number, stock: number): void{
+export async function EditVarProduct(productId: number, variantId: number): Promise<void>{
         const product_temp = product.find((p: Product) => p.id === productId);
         if(!product_temp){
             console.log("Product not found");
+            askQuestion("Press Enter to return...").then(() => {
+                handleProductManager("5");
+            });
             return;
         }
         const variant_temp = product_temp.variant.find((v: Variant) => v.id === variantId);
         if(!variant_temp){
             console.log("Variant not found");
+            handleProductManager("5");
             return;
         }
+        const size: string = await askQuestion("Enter new variant size : ");
+        const color: string = await askQuestion("Enter new variant color : ");
+        const price: string = await askQuestion("Enter new variant price : ");
+        const cost_price: string = await askQuestion("Enter new variant cost price : ");
+        const stock: string = await askQuestion("Enter new variant stock : ");
         variant_temp.size = size;
         variant_temp.color = color;
         variant_temp.price = price;
@@ -160,12 +175,11 @@ export async function renderProducts() {
 
     const list = document.getElementById("product-list") as HTMLUListElement;
 
-    list.innerHTML = ""; // xóa dữ liệu cũ
+    list.innerHTML = "";
 
     products.forEach((product: Product) => {
         const li = document.createElement("li");
 
-        // thông tin product
         li.innerHTML = `
             <b>${product.name}</b> (${product.category})
             <ul>
@@ -182,4 +196,99 @@ export async function renderProducts() {
 
         list.appendChild(li);
     });
+}
+
+export async function menuProductManager(): Promise<void>{
+    console.log("====== Product Management System ======");
+    console.log("1. Browse Product");
+    console.log("2. Add Product");
+    console.log("3. Add Variant For Product");
+    console.log("4. Edit Product");
+    console.log("5. Edit Variant");
+    console.log("6. Add Quantity");
+    console.log("7. Subtract Quantity");
+    console.log("0. Exit");
+    const option: string = await askQuestion("Please select an option: ");
+    handleProductManager(option);
+
+}
+
+export async function handleProductManager(option: string): Promise<void>{
+    let productID: string = "";
+    switch(option){
+        case "0":
+                console.log("Exiting...");
+                closeReadline();
+                return;
+                break
+        case "1":
+            BrowseProduct();
+            PressEnterToContinue(menuProductManager);
+            break;
+        case "2":
+            addProductFlow();
+            PressEnterToContinue(menuProductManager);
+            break;
+        case "3":
+             productID = await askQuestion("Enter product ID to add variant: ");
+            if(isNaN(Number(productID)) || productID === ""){
+                console.log("Invalid product ID. Please try again.");
+                handleProductManager("3");
+                return;
+            }
+            addVariantFlow(Number(productID));
+            break;
+        case "4":
+            productID = await askQuestion("Enter product ID to edit: ");
+            if(isNaN(Number(productID)) || productID === ""){
+                console.log("Invalid product ID. Please try again.");
+                handleProductManager("4");
+                return;
+            }
+            EditProduct(Number(productID));
+            PressEnterToContinue(menuProductManager);
+            break;
+        case "5":
+            productID = await askQuestion("Enter product ID to edit variant: ");
+            if(isNaN(Number(productID)) || productID === ""){
+                console.log("Invalid product ID. Please try again.");
+                handleProductManager("5");
+                return;
+            }
+            const variantID = await askQuestion("Enter variant ID to edit: ");
+            if(isNaN(Number(variantID)) || variantID === ""){
+                console.log("Invalid variant ID. Please try again.");
+                handleProductManager("5");
+                return;
+            }
+            EditVarProduct(Number(productID), Number(variantID));
+            PressEnterToContinue(menuProductManager);
+            break;
+        case "6":
+            productID = await askQuestion("Enter product ID to add quantity: ");
+            if(isNaN(Number(productID)) || productID === ""){
+                console.log("Invalid product ID. Please try again.");
+                handleProductManager("6");
+                return;
+            }
+            const variantIDAdd = await askQuestion("Enter variant ID to add quantity: ");
+            if(isNaN(Number(variantIDAdd)) || variantIDAdd === ""){
+                console.log("Invalid variant ID. Please try again.");
+                handleProductManager("6");
+                return;
+            }
+            const quantityAdd = await askQuestion("Enter quantity to add: ");
+            if(isNaN(Number(quantityAdd)) || quantityAdd === ""){
+                console.log("Invalid quantity. Please try again.");
+                handleProductManager("6");
+                return;
+            }
+            AddQuantity(Number(productID), Number(variantIDAdd), Number(quantityAdd));
+            PressEnterToContinue(menuProductManager);
+            break;
+        default:
+            console.log("Invalid option. Please try again.");
+            menuProductManager();
+            break;
+    }
 }

@@ -1,10 +1,14 @@
-{
-    "customer": [
-        {
-            "id": 1,
-            "name": "kotd",
-            "phone": "0123456789",
-            "total_spent": 0
-        }
-    ]
-}
+[
+  {
+    "id": 1,
+    "name": "kotd",
+    "phone": "0123456789",
+    "total_spent": 0
+  },
+  {
+    "id": 2,
+    "name": "Dat09",
+    "phone": "0123321123",
+    "total_spent": 0
+  }
+]

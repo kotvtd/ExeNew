@@ -4,7 +4,8 @@ import path from 'path';
 
 const jsonpath = path.join(__dirname,"../../src/data");
 export const loadJSON = (filename: string) =>{
-    const filePath =path.join(jsonpath, filename);
+    const filePath = path.join(jsonpath, filename);
+    console.log(filePath);
     return JSON.parse(fs.readFileSync(filePath, "utf-8"));
 }
 
